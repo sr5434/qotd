@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 
 export async function GET(req: NextRequest){
     const accessoken = process.env.FB_ACCESS_TOKEN;
-    const apiRes = await fetch("https://api.quotable.io/random", { method: "GET", next: { revalidate: 10 }' });
+    const apiRes = await fetch("https://api.quotable.io/random", { method: "GET", next: { revalidate: 10 } });
     const data = await apiRes.json();
     const hashtags = function(data: any) {
         let txt="";
