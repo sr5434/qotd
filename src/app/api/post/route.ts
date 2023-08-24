@@ -15,8 +15,10 @@ export async function GET(req: NextRequest){
     }
     const post = `"${data.content} - ${data.author} ${hashtags(data)}"`;
     let fbRes = await fetch(`https://graph.facebook.com/v17.0/120584134465038/feed?message=${encodeURIComponent(post)}&access_token=${accessoken}`, {
-        method: 'POST'
+        method: 'POST', 
+        next: { revalidate: 10 }
     });
-    console.log(fbRes);
+    let fbResJson = await fbRes.json()
+    console.log(fbResJson);
     return NextResponse.json({ postData: post })
 }
